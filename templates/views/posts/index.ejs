@@ -1,0 +1,9 @@
+
+    
+<% layout('.././layouts/main') %> 
+
+<ul>
+    <% for(post of posts){ %>
+        <li><a href="/posts/<%=post._id%>"><%= post.title %></a> </li>
+     <% } %> 
+</ul>

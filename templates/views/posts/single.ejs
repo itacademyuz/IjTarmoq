@@ -1,0 +1,17 @@
+<% layout('.././layouts/main') %> 
+<div class="row">
+    <div class="col-4">
+        <h1><%= post.title %> </h1>
+        <p><%=post.body %></p>
+        <div class="row">
+            <div class="col-4">
+                <a class="btn btn-warning" href="/posts/<%=post._id%>/edit">O'zgartirish</a>
+            </div>
+            <div class="col-3">
+                <form action="/posts/<%=post._id%>?_method=DELETE" method="post">
+                    <button class="btn btn-danger">O'chirish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

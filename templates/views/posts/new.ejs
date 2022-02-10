@@ -1,0 +1,24 @@
+<% layout('.././layouts/main') %> 
+    <div class="container">
+        <h1>Post yaratish</h1>
+        <div class="row">
+            <div class="col-4">
+                <form class="needs-validation" action="/posts" method="post" novalidate>
+                    
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Sarlavha</label>
+                        <input class="form-control" type="text" id="title" required name="post[title]">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="body">Matn</label>
+                        <textarea class="form-control" required id="body" name="post[body]"></textarea>
+                    </div>
+                    <button class="btn btn-success">Post qoldiring</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
