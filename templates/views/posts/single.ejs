@@ -1,10 +1,10 @@
 <% layout('.././layouts/main') %> 
 <div class="row">
-    <div class="col-4">
+    <div class="col-6">
         <h1><%= post.title %> </h1>
         <p><%=post.body %></p>
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <a class="btn btn-warning" href="/posts/<%=post._id%>/edit">O'zgartirish</a>
             </div>
             <div class="col-3">
@@ -12,6 +12,31 @@
                     <button class="btn btn-danger">O'chirish</button>
                 </form>
             </div>
+            
         </div>
+    </div>
+    <div class="col-6">
+        <h1>Izoh Qoldiring</h1>
+        <div class="mb-3">
+            <form action="/posts/<%=post._id%>/comment" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="content">Izoh matni</label>
+                    <textarea class="form-control" name="comment[content]" id="content"></textarea>
+                </div>
+                <button class="btn btn-sm btn-success">Yuborish</button>
+            </form>
+        </div>
+        
+            <% for(let comment of comments){ %> 
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="card-text"><%= comment.content %> </div>
+                    </div>
+                    <form action="/posts/<%=post._id%>/comment/<%= comment._id %>?_method=DELETE" method="post">
+                        <button class="btn btn-sm btn-danger mb-3 ml-1">O'chirish</button>
+                    </form>
+                </div>
+            <% } %> 
+    
     </div>
 </div>
