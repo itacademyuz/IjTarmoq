@@ -3,11 +3,15 @@
         <h1>Post yaratish</h1>
         <div class="row">
             <div class="col-4">
-                <form class="needs-validation" action="/posts" method="post" novalidate>
+                <form class="needs-validation" enctype="multipart/form-data" action="/posts" method="post" novalidate>
                     
                     <div class="mb-3">
                         <label class="form-label" for="title">Sarlavha</label>
                         <input class="form-control" type="text" id="title" required name="post[title]">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="image">Rasmlar</label>
+                        <input class="form-control" multiple type="file" id="image" name="image"/>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="body">Matn</label>

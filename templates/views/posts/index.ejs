@@ -2,8 +2,29 @@
     
 <% layout('.././layouts/main') %> 
 
-<ul>
+
     <% for(post of posts){ %>
-        <li><a href="/posts/<%=post._id%>"><%= post.title %></a> </li>
+        
+
+        <div class="spacer-50"></div>
+            <div class="container">
+            <div class="row summary mb-5">
+                <div class="col-6">
+                    <span class="title"><h4><%= post.title %> </h4></span>
+                    <% let body = '' %> 
+                    <% if(post.body.length>500){ %>
+                            <% body = `${post.body.substring(0, 500)}...` %> 
+                    <% }else{ %>
+                            <% body = post.body %> 
+                    <% } %> 
+                    <p class="teaser-text"><%= body %> </p>
+                    <a class="btn btn-primary" href="/posts/<%=post._id%>">Batafsil</a>
+                </div>
+                <div class="col-6 thumbnail mb-3">
+                    <img src="data:image/png;base64,<%= post.Photos[0].dataValues.data %> " alt="<%= post.Photos[0].dataValues.description %> " class="img-responsive" />
+                </div>
+                
+            </div>
+        </div>
+
      <% } %> 
-</ul>

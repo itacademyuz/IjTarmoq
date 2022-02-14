@@ -10,6 +10,7 @@ const { PostRouter } = require('./routes/PostRoutes')
 const { CommentRouter } = require('./routes/CommentRoutes')
 const app = express()
 
+app.use(express.static(path.join(__dirname, '../public')))
 buildDB()
 app.use(express.urlencoded({extended: true}))
 app.engine('ejs', engine)
