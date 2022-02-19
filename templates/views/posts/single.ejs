@@ -1,9 +1,39 @@
 <% layout('.././layouts/main') %> 
 <div class="row">
     <div class="col-6">
-        <h1><%= post.title %> </h1>
-        <p><%=post.body %></p>
-        <div class="row">
+        <div class="card mb-3">
+
+
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <% photos.forEach((photo, i)=>{  %>
+                    <% const classActive = i===0?'active':'' %> 
+                    <div class="carousel-item <%= classActive  %> ">
+                        <img src="data:image/png;base64,<%= photo.data %> " class="d-block w-100" alt="<%= photo.description %> ">
+                      </div>
+                    
+                  <% }) %> 
+                </div>
+                <% if(photos.length>1){ %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                <% } %>  
+              </div>
+
+
+            <div class="card-body">
+              <h4 class="card-title"><%= post.title %></h4>
+              <p class="card-text"><%=post.body %></p>
+              <p class="card-text"><small class="text-muted"><%= createdMoment %> </small></p>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-3">
                 <a class="btn btn-warning" href="/posts/<%=post._id%>/edit">O'zgartirish</a>
             </div>
@@ -13,15 +43,15 @@
                 </form>
             </div>
             
-        </div>
+    </div>
     </div>
     <div class="col-6">
         <h1>Izoh Qoldiring</h1>
         <div class="mb-3">
-            <form action="/posts/<%=post._id%>/comment" method="post">
+            <form class="needs-validation" action="/posts/<%=post._id%>/comment" novalidate method="post">
                 <div class="mb-3">
                     <label class="form-label" for="content">Izoh matni</label>
-                    <textarea class="form-control" name="comment[content]" id="content"></textarea>
+                    <textarea class="form-control" name="comment[content]" id="content" required></textarea>
                 </div>
                 <button class="btn btn-sm btn-success">Yuborish</button>
             </form>

@@ -3,15 +3,28 @@
         <h1>Postni o'zgartirish</h1>
         <div class="row">
             <div class="col-4">
-                <form class="needs-validation" action="/posts/<%= post._id %>?_method=PUT" novalidate method="post">
+                <form  class="mb-5 needs-validation" action="/posts/<%= post._id %>?_method=PUT" enctype="multipart/form-data" novalidate method="post">
                     
                     <div class="mb-3">
                         <label class="form-label" for="title">Sarlavha</label>
-                        <input class="form-control" value="<%= post.title %> " type="text" required id="title" name="post[title]">
+                        <input class="form-control" value="<%= post.title %>" type="text" required id="title" name="post[title]">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="image">Rasmlar</label>
+                        <input class="form-control" multiple type="file" id="image" name="image"/>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="body">Matn</label>
-                        <textarea class="form-control" id="body" required name="post[body]"><%= post.body %> </textarea>
+                        <textarea class="form-control" id="body" required rows="12" cols="100" name="post[body]"><%= post.body %></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <% photos.forEach((photo, i)=>{ %>
+                            <img class="img-thumbnail" src="data:image/png;base64,<%= photo.data %>" />
+                            <div class="form-check-inline">
+                                <input type="checkbox" id="photo-<%= i %>" name="deletePhotos[]" value="<%= photo._id %>">
+                            </div>
+                            <label for="photo-<%= i %>">O'chirilsinmi?</label>
+                        <% }) %> 
                     </div>
                     <button class="btn btn-success">Postni o'zgartiring</button>
                 </form>
