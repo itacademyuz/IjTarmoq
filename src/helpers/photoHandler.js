@@ -1,6 +1,6 @@
-const { Photo } = require("../models/Photo");
 const multer = require('multer')
-const sharp = require('sharp')
+const sharp = require('sharp');
+const { addPhotos, destroyPhotos } = require("../models/DAL/PhotoRepository");
 
 const upload = multer({
     limits: {
@@ -21,13 +21,13 @@ const createPhotos = async(files, post_id)=>{
             const data = rawData.toString("base64");
             const PostId = post_id
             const photo = {data, description, PostId}
-            await Photo.create(photo)
+            await addPhotos(photo);
         }
     }
 }
 const deletePhotos = async(photoIds=[])=>{
     for (const id of photoIds) {
-        await Photo.destroy({where:{_id: id}})
+        await destroyPhotos(id)
     }
 }
 module.exports = {createPhotos, deletePhotos, upload}
