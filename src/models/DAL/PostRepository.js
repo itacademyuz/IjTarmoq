@@ -13,8 +13,9 @@ const getAllPosts = async ()=>{
     })
 }
 
-const createPost = async (post, files) =>{
-    const postData =  Post.build(post)
+const createPost = async (post, files, user_id) =>{
+    const postData =  Post.build(post);
+    post.UserId = user_id
     await postData.save()
     await createPhotos(files, postData._id)
 }

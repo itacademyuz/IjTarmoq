@@ -9,6 +9,7 @@ const { BlogError } = require('./helpers/BlogErrors')
 const { PostRouter } = require('./routes/PostRoutes')
 const { CommentRouter } = require('./routes/CommentRoutes');
 const { UserRouter } = require('./routes/UserRoutes');
+const flash = require('connect-flash');
 const app = express()
 app.use(express.static(path.join(__dirname, '../public')))
 buildDB()
@@ -27,10 +28,17 @@ app.use(session({
     }
 }))
 
+app.use(flash());
+
 passport.initialize();
 app.use(passport.session());
 require('./helpers/auth-local').localConfig(passport)
-
+app.use((req, res, next)=>{
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user
+    next()
+})
 app.get('/', (req, res)=>{
     res.render('index')
 })

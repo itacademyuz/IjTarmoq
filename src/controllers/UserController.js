@@ -1,6 +1,8 @@
 const { User} = require('../models/User')
 
-
+const renderRegisterPage = (req, res)=>{
+    res.render('users/register');
+}
 const registerUser = async (req, res, next)=>{
     try {
         const {user} = req.body;
@@ -9,19 +11,31 @@ const registerUser = async (req, res, next)=>{
             if(err){
                 return next(err);
             }
-            res.status(201).json({xabar: "Siz ro'yxatdan o'tdingiz"})
+            req.flash('success', "Saytimizga xush kelibsiz");
+            res.redirect('/posts');
         })
     } catch (e) {
-        console.log(e);
-        res.status(400).json({error: e.message})
+        req.flash('error', e.message)
+        res.redirect('/registers');
     }
 }
-
-const loginUser = (req, res)=>{
-    res.status(200).json({msg:` Xush kelibsiz ${req.user.first_name}`})
+const renderLoginPage = (req, res)=>{
+    res.render('users/login')
 }
-
+const loginUser = (req, res)=>{
+    req.flash('success', 'Xush kelibsiz');
+    const redirectUrl = req.session.returnTo || '/posts'
+    delete req.session.returnTo
+    res.redirect(redirectUrl);
+}
+const logoutUser = (req, res)=>{
+    req.logout();
+    res.redirect('/posts');
+}
 module.exports = {
+    renderRegisterPage,
     registerUser,
-    loginUser
+    renderLoginPage,
+    loginUser,
+    logoutUser
 }

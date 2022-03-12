@@ -12,10 +12,21 @@
           <li class="nav-item">
             <a class="nav-link" href="/posts">Barcha Postlar</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/posts/new">Yangi Post qo'shish</a>
-          </li>
+          <% if(user){ %>
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/new">Yangi Post qo'shish</a>
+            </li>
+         <% } %> 
         </ul>
+      </div>
+      <div class="navbar-nav">
+        <% if(!user){ %>
+          <a class="nav-link" href="/login">Login</a> 
+          <a class="nav-link" href="/register">Ro'yxatdan o'tish</a> 
+      <% }else{ %> 
+        <a class="nav-link" href="/#">Xush kelibsiz <%= user.first_name %> </a> 
+        <a class="nav-link" href="/logout">Tizimdan chiqish</a> 
+      <% } %> 
       </div>
     </div>
   </nav>

@@ -1,0 +1,17 @@
+<% layout('../layouts/main') %> 
+<h1>LOGIN</h1>
+<div class="row">
+    <div class="col-4">
+        <form action="/login" class="needs-validation" novalidate  method="post">
+            <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" id="email" name="email" required>
+            </div>   
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" id="password" name="password" required>
+            </div> 
+            <button class="btn btn-success">Login</button> 
+        </form>
+    </div>
+</div>

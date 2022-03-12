@@ -1,7 +1,14 @@
 
 const moment = require('moment')
 const { BlogError } = require('../helpers/BlogErrors')
-const { getAllPosts, createPost, findById, findSingleWithComments, alterPost, destroyPost } = require('../models/DAL/PostRepository')
+const { 
+    getAllPosts, 
+    createPost, 
+    findById, 
+    findSingleWithComments, 
+    alterPost, 
+    destroyPost 
+} = require('../models/DAL/PostRepository')
 
 const showAll = async(req, res)=>{
     const posts = await getAllPosts();
@@ -15,7 +22,7 @@ const renderAddPage = (req, res)=>{
 const addNewPost = async(req, res)=>{
     const {post} = req.body
     const {files} = req
-    await createPost(post, files)
+    await createPost(post, files, req.user._id)
     res.redirect('/posts')
 }
 const renderEditPage = async(req, res)=>{

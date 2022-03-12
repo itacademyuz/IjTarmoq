@@ -4,7 +4,7 @@ const { createComment, destroyComment } = require('../models/DAL/CommentReposito
 const addComment = async(req, res)=>{
         const {id} = req.params
         const {comment} = req.body
-        await createComment(id, comment)
+        await createComment(id, req.user._id, comment)
         res.redirect(`/posts/${id}`)
 }
 const deleteComment = async(req, res)=>{

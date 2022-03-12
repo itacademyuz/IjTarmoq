@@ -20,9 +20,11 @@
                     <p class="teaser-text"><%= body %> </p>
                     <a class="btn btn-primary" href="/posts/<%=post._id%>">Batafsil</a>
                 </div>
-                <div class="col-6 thumbnail mb-3">
-                    <img src="data:image/png;base64,<%= post.Photos[0].dataValues.data %>" alt="<%= post.Photos[0].dataValues.description %> " class="img-responsive" />
-                </div>
+                <% if(post.Photos.length>0){ %> 
+                    <div class="col-6 thumbnail mb-3">
+                        <img src="data:image/png;base64,<%= post.Photos[0].dataValues.data %>" alt="<%= post.Photos[0].dataValues.description %> " class="img-responsive" />
+                    </div>
+                <% } %> 
                 
             </div>
         </div>
